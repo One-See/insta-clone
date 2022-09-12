@@ -2,6 +2,8 @@ import {initializeApp} from 'firebase/app';
 import {FieldValue} from 'firebase/firestore'
 import {getFirestore} from 'firebase/firestore/lite'
 
+import {getAuth} from 'firebase/auth'
+
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -12,8 +14,12 @@ const firebaseConfig = {
     measurementId: process.env.REACT_APP_MEASUREMENT_ID
 }
 
-const fireBaseApp = getFirestore(initializeApp(firebaseConfig))
+const app = initializeApp(firebaseConfig)
+
+const fireBaseApp = getFirestore(app)
+
+const auth = getAuth(app)
 
 console.log(fireBaseApp, 'firebaseapp initialized')
 
-export {fireBaseApp, FieldValue}
+export {fireBaseApp, auth, FieldValue}
