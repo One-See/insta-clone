@@ -13,7 +13,7 @@ export default function useAuthListner() {
         const listner = onAuthStateChanged(auth, (user) => {
             if (user) {
                 localStorage.setItem('authUser', JSON.stringify(user))
-                setUser(JSON.stringify(user))
+                setUser(user)
             } else {
                 localStorage.removeItem('authUser')
                 setUser(null)
