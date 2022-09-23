@@ -14,7 +14,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 import * as ROUTES from '../constants/routes'
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore/lite'
-import checkUserExists from '../services/userService'
+import {checkUserExists} from '../services/userService'
 
 export default function Signup() {
 
