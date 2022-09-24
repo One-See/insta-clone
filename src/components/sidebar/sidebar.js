@@ -10,8 +10,8 @@ export  default function Sidebar() {
 
     return (
         <div>
-            <User userName={user.username} fullName={user.fullName} />
-            <Suggestions userId={user.userId} />
+            <User userName={user.username} fullName={user.fullName} userId={user.userId}/>
+            <Suggestions userId={user.userId} docId={user.docId}/>
         </div>
     )
 }

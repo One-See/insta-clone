@@ -1,5 +1,5 @@
 
-import { collection, getDocs, query, where } from "firebase/firestore/lite"
+import { arrayUnion, collection, doc, getDocs, limit, query, updateDoc, where } from "firebase/firestore/lite"
 import { fireBaseApp, FieldValue } from "../library/firebase_config"
 
 /**
@@ -26,4 +26,40 @@ export const getUserbyUid = async (uid) => {
         ...item.data(),
         docId: item.id
     })) 
+}
+
+export const getUsersToFollw = async (uid) => {
+    const users = await getDocs(query(collection(fireBaseApp, 'users'), where('followers', "not-in", [[uid]]), limit(5)))
+
+    console.log(users, 'fetched users to be followed')
+
+    const user_profiles = []
+
+    for (const data of users.docs) {
+        if (data.data().userId !== uid) {
+            user_profiles.push({
+                ...data.data(),
+                docId: data.id
+            })
+        }
+        
+    }
+
+    return user_profiles
+}
+
+export const followUser = async (userDocId, userId, loggedInUserId, loggedInUserDocId) => {
+
+    console.log(userDocId, 'userDocId', userId, 'userId', loggedInUserId, 'loggedInUserId', loggedInUserDocId, 'loggedInUserDocId')
+
+    await updateDoc(doc(fireBaseApp, 'users', userDocId), {
+        followers: arrayUnion(loggedInUserId)
+    } )
+
+    await updateDoc(doc(fireBaseApp, 'users', loggedInUserDocId), {
+        following: arrayUnion(userId)
+    } )
+
+    console.log('updated')
+
 }
