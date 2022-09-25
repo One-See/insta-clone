@@ -8,6 +8,8 @@ export default function Suggestions(props) {
 
     const [profiles, setProfiles] = useState(null)
 
+    const [refresh, setRefresh] = useState(false)
+
     useEffect(() => {
 
         const getUsers = async () => {
@@ -19,7 +21,7 @@ export default function Suggestions(props) {
             getUsers()
         }
 
-    }, [props.userId])
+    }, [props.userId, refresh])
 
     return (
         props.userId && <>
@@ -31,7 +33,7 @@ export default function Suggestions(props) {
                         </div>
                         {
                             profiles.map(item => (
-                                <SuggestedUser key={item.docId} userDocId={item.docId} loggedInUserId={props.userId} userName={item.username} fullName={item.fullName} loggedInuserDocId={props.docId} userId={item.userId}/>
+                                <SuggestedUser key={item.docId} refresh={setRefresh} userDocId={item.docId} loggedInUserId={props.userId} userName={item.username} fullName={item.fullName} loggedInuserDocId={props.docId} userId={item.userId}/>
                             ))
                         }
 

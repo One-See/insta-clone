@@ -6,7 +6,7 @@ import pic from '../../assets/images/my_pic.png'
 import * as ROUTES from '../../constants/routes'
 import { followUser } from '../../services/userService'
 
-export default function SuggestedUser({username, fullName, userId, userDocId, loggedInUserId, loggedInuserDocId}) {
+export default function SuggestedUser({username, fullName, userId, userDocId, loggedInUserId, loggedInuserDocId, refresh}) {
 
     const [followed, setFollowed] = useState(false)
 
@@ -16,6 +16,7 @@ export default function SuggestedUser({username, fullName, userId, userDocId, lo
         await followUser(userDocId, userId, loggedInUserId, loggedInuserDocId)
 
         setFollowed(true)
+        refresh((value) => !value)
     }
 
     return (
