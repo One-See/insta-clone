@@ -64,6 +64,10 @@ export const getUserPostsByUserids = async (userIds, loggedInuserId) => {
 
     console.log(userIds, 'userIds to fetch posts of')
 
+    if (!userIds || !userIds.length) {
+        return []
+    }
+
     const posts = await getDocs(query(collection(fireBaseApp, 'photos'), where('userId', 'in', userIds)))
 
     const followedUserPosts =  posts.docs.map(item => ({

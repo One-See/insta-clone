@@ -24,7 +24,7 @@ export default function Header() {
     }
 
     return (
-        <nav className="mx-0 my-0 p-4 max-w-screen shadow-lg shadow-gray-200">
+        <nav className="mx-0 my-0 p-4 max-w-screen shadow-lg shadow-gray-200 bg-white">
             <div className='container h-full flex mx-auto justify-between'>
                 <h1 className='text-center items-center'>
                     <Link to={ROUTES.LOGIN_PAGE}>
