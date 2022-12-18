@@ -10,14 +10,17 @@ export default function useUser() {
     const {user} = useContext(userContext)
 
     useEffect(() => {
-
-        const getUserObjByUid = async () => {
-            const [response] =  await getUserbyUid(user.uid)
-            setactiveUser(response)
-        }
-
-        if (user?.uid) {
-            getUserObjByUid()
+        if (user) {
+            const getUserObjByUid = async () => {
+                const [response] =  await getUserbyUid(user.uid)
+                setactiveUser(response)
+            }
+    
+            if (user?.uid) {
+                getUserObjByUid()
+            }
+        } else {
+            setactiveUser(null)
         }
     }, [user])
 

@@ -8,7 +8,6 @@ import insta_logo from '../assets/images/insta-logo.png'
 import * as ROUTES from '../constants/routes'
 import userContext from '../context/user'
 
-import {} from '../hooks/user_auth_listener'
 import { auth } from '../library/firebase_config'
 
 export default function Header() {
@@ -27,9 +26,7 @@ export default function Header() {
         <nav className="mx-0 my-0 p-4 max-w-screen shadow-lg shadow-gray-200 bg-white">
             <div className='container h-full flex mx-auto justify-between'>
                 <h1 className='text-center items-center'>
-                    <Link to={ROUTES.LOGIN_PAGE}>
-                        <img src={insta_logo} alt="instagram logo" className='w-24 cursor-pointer' />
-                    </Link>
+                    <img src={insta_logo} alt="instagram logo" className='w-24' />
                 </h1>
                 <div className='space-x-4 mr-2 font-mono flex text-center items-center'>
                     {

@@ -9,6 +9,7 @@ export  default function Sidebar() {
     console.log(user, 'fetched user')
 
     return (
+        user && user.userId &&
         <div>
             <User userName={user.username} fullName={user.fullName} userId={user.userId}/>
             <Suggestions userId={user.userId} docId={user.docId}/>

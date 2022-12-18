@@ -1,5 +1,5 @@
 
-import { arrayUnion, collection, doc, getDocs, limit, orderBy, query, updateDoc, where } from "firebase/firestore/lite"
+import { arrayRemove, arrayUnion, collection, doc, getDocs, limit, orderBy, query, updateDoc, where } from "firebase/firestore/lite"
 import { fireBaseApp, FieldValue } from "../library/firebase_config"
 
 /**
@@ -89,5 +89,24 @@ export const getUserPostsByUserids = async (userIds, loggedInuserId) => {
     )
 
     return withUserDetails
+
+}
+
+export const likeUnlikePost = async (photoDocId, loggedInUserDocId, liked) => {
+
+    console.log(photoDocId, 'photoDocId', loggedInUserDocId, 'loggedInUserDocId')
+
+    if (!liked) {
+        await updateDoc(doc(fireBaseApp, 'photos', photoDocId), {
+            likes: arrayRemove(loggedInUserDocId)
+        } )
+    } else {
+        await updateDoc(doc(fireBaseApp, 'photos', photoDocId), {
+            likes: arrayUnion(loggedInUserDocId)
+        } )
+    }
+
+
+    console.log('likes updated')
 
 }

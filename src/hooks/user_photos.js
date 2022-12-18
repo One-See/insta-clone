@@ -2,15 +2,19 @@ import { useContext, useEffect, useState } from "react";
 import userContext from "../context/user";
 import { getUserbyUid, getUserPostsByUserids } from "../services/userService";
 
-export default function useUserPhotos() {
+export default function useUserPhotos(refresh = false) {
 
     const {user} = useContext(userContext)
 
     const [photos, setPhotos] = useState(null)
 
+    console.log('in useUserPhotes')
+
     useEffect(() => {
         
         async function getPostsByUserIds() {
+
+            console.log('in useEffect of useUserPosts')
             
             const [userData] = await getUserbyUid(user.uid)
 
@@ -35,7 +39,7 @@ export default function useUserPhotos() {
             getPostsByUserIds()
         }
 
-    }, [user])
+    }, [user, refresh])
 
     return {posts: photos}
 
